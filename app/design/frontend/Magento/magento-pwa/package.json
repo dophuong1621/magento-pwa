@@ -16,8 +16,8 @@
     "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
     "prettier": "prettier --loglevel warn --ignore-path .gitignore 'src/**/*.@(css|graphql|js)' '*.js'",
     "prettier:check": "yarn run -s prettier -- --check",
-    "prettier:fix": "yarn run -s prettier -- --write",
-    "start": "react-scripts start --openssl-legacy-provider",
+    "prettier:fix": "yarn run -s prettier --No --write",
+    "start": "react-scripts --openssl-legacy-provider start",
     "start:debug": "node --inspect-brk ./node_modules/.bin/webpack-dev-server --progress --color --env.mode development",
     "watch": "webpack-dev-server --progress --color --env.mode development",
     "storybook": "start-storybook -p 9001 -c src/.storybook",
@@ -28,7 +28,11 @@
     "@magento/venia-drivers": "src/drivers"
   },
   "dependencies": {
-    "@magento/pwa-buildpack": "~11.4.1"
+    "@apollo/react-hooks": "^4.0.0",
+    "@magento/pwa-buildpack": "~11.4.1",
+    "bootstrap": "^5.2.3",
+    "react-bootstrap": "^2.6.0",
+    "react-hook-form": "7.38.0"
   },
   "devDependencies": {
     "@adobe/apollo-link-mutation-queue": "~1.0.2",

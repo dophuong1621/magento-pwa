@@ -1,0 +1,26 @@
+type Query {
+    getCustomerQuestionData : [customerQuestionData] @resolver( class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CustomerQuestion") @doc(description: "Get All Customer Question")
+}
+
+type customerQuestionData {
+    customer_id : Int,
+    customer_name : String,
+    title : String,
+    content : String,
+    created_at : String
+    updated_at : String
+}
+
+type Mutation {
+    questionFormSubmit(input: questionInput!): questionOutput @resolver(class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CreateQuestion") @doc(description:"Question form")
+}
+
+input questionInput {
+    name: String
+    title: String
+    content: String
+}
+
+type questionOutput {
+    success_message: String
+}

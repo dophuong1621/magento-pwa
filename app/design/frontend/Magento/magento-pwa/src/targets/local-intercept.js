@@ -5,16 +5,16 @@
  */
 
 module.exports = (targets) => {
-    targets.of("@magento/venia-ui").routes.tap((routes) => {
+    targets.of('@magento/venia-ui').routes.tap((routes) => {
         routes.push({
-            name: "TestimonialQuestionIndex",
-            pattern: "/tigren_question/index",
-            path: require.resolve("../components/TestimonialQuestion/listQuestion.js"),
+            name: 'CustomerQuestionIndex',
+            pattern: '/tigren_question/index',
+            path: require.resolve('../components/CustomerQuestion/list/listQuestion.js')
         });
         routes.push({
-            name: "TestimonialQuestionCreate",
-            pattern: "/tigren_question/create",
-            path: require.resolve("../components/TestimonialQuestion/createQuestion.js"),
+            name: 'CustomerQuestionCreate',
+            pattern: '/tigren_question/create',
+            path: require.resolve('../components/CustomerQuestion/create/createQuestion.js')
         });
         return routes;
     });
