@@ -11,12 +11,10 @@
            comment="Tigren Customer Question Table">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
                 comment="Entity ID" />
-        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" comment="Customer ID" />
         <column xsi:type="varchar" name="customer_name" nullable="false" length="255" comment="Customer Name" />
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title" />
         <column xsi:type="varchar" name="content" nullable="false" length="255" comment="Content" />
-        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Created Time" />
+        <column xsi:type="timestamp" name="created_at" nullable="true" comment="Created Time" />
         <column xsi:type="timestamp" name="updated_at" nullable="true" comment="Updated Time" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id" />

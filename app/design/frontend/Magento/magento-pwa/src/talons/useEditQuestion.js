@@ -5,19 +5,19 @@
  */
 
 import { useMutation } from '@apollo/client';
-import DEFAULT_OPERATIONS from '../components/CustomerQuestion/create/createQuestion.gql';
+import DEFAULT_OPERATIONS from '../components/CustomerQuestion/update/editQuestion.gql';
 import mergeOperations from '@magento/peregrine/lib/util/shallowMerge';
 import { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export const useCreateQuestion = props => {
-    const operations = mergeOperations(DEFAULT_OPERATIONS, props.operations);
+export const useEditQuestion = props => {
+    const getDataID = mergeOperations(DEFAULT_OPERATIONS, props.operations);
     const {
-        createCustomerQuestion
-    } = operations;
+        editCustomerQuestion
+    } = getDataID;
 
-    const [createQuestion, { error: createQuestionError }] = useMutation(
-        createCustomerQuestion,
+    const [updateQuestion, { error: createQuestionError }] = useMutation(
+        editCustomerQuestion,
         {
             fetchPolicy: 'no-cache'
         }
@@ -26,7 +26,7 @@ export const useCreateQuestion = props => {
     const handleSubmit = useCallback(
         async formValues => {
             try {
-                await createQuestion({
+                await updateQuestion({
                     variables: {
                         customer_name: formValues.name,
                         title: formValues.title,
@@ -40,7 +40,7 @@ export const useCreateQuestion = props => {
                 }
             }
         },
-        [createQuestion]
+        [updateQuestion]
     );
 
     const errors = useMemo(

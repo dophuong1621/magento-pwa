@@ -4,8 +4,13 @@
  * @license   Open Software License ("OSL") v. 3.0
  */
 
+/*
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+
 import React from 'react';
-import { useCreateQuestion } from '../../../talons/useCreateQuestion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Field from '@magento/venia-ui/lib/components/Field';
 import TextInput from '@magento/venia-ui/lib/components/TextInput';
@@ -14,22 +19,26 @@ import { Form } from 'informed';
 import { useStyle } from '@magento/venia-ui/lib/classify';
 import defaultClasses from '@magento/venia-ui/lib/components/CreateAccount/createAccount.module.css';
 import Button from '@magento/venia-ui/lib/components/Button';
+import { useUpdateQuestion } from '../../../talons/useUpdateQuestion';
 
-const CreateQuestion = (props) => {
-    const talonProps = useCreateQuestion({});
+const UpdateQuestion = (props) => {
+    const talonProps = useUpdateQuestion({});
     const { handleSubmit } = talonProps;
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, props.classes);
+    const fetchDataIdEdit = useUpdateQuestion({});
+    let formData;
+    formData = fetchDataIdEdit.editQuestion;
     const submitButton = (
         <Button
             className={classes.submitButton}
             type="submit"
             priority="high"
-            data-cy="CreateQuestion-submitButton"
+            data-cy="UpdateQuestion-submitButton"
         >
             <FormattedMessage
-                id={'createQuestion.createQuestionText'}
-                defaultMessage={'Create Question'}
+                id={'updateQuestion.updateQuestionText'}
+                defaultMessage={'Update Question'}
             />
         </Button>
     );
@@ -42,14 +51,14 @@ const CreateQuestion = (props) => {
         >
             <h2 data-cy="CreateAccount-title" className={classes.title}>
                 <FormattedMessage
-                    id={'createQuestion.createQuestionTitle'}
-                    defaultMessage={'Create Customer Question'}
+                    id={'updateQuestion.updateQuestionTitle'}
+                    defaultMessage={'Update Customer Question'}
                 />
             </h2>
             <Field
                 id="name"
                 label={formatMessage({
-                    id: 'createQuestion.name',
+                    id: 'updateQuestion.name',
                     defaultMessage: 'Name'
                 })}
             >
@@ -68,7 +77,7 @@ const CreateQuestion = (props) => {
             <Field
                 id="title"
                 label={formatMessage({
-                    id: 'createQuestion.title',
+                    id: 'updateQuestion.title',
                     defaultMessage: 'Title'
                 })}
             >
@@ -87,7 +96,7 @@ const CreateQuestion = (props) => {
             <Field
                 id="content"
                 label={formatMessage({
-                    id: 'createQuestion.content',
+                    id: 'updateQuestion.content',
                     defaultMessage: 'Content'
                 })}
             >
@@ -109,4 +118,5 @@ const CreateQuestion = (props) => {
     </div>);
 };
 
-export default CreateQuestion;
+export default UpdateQuestion;
+

@@ -1,26 +1,62 @@
+#List Question
 type Query {
-    getCustomerQuestionData : [customerQuestionData] @resolver( class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CustomerQuestion") @doc(description: "Get All Customer Question")
+    getCustomerQuestionData : [listQuestionData] @resolver( class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CustomerQuestion")
 }
 
-type customerQuestionData {
-    customer_id : Int,
-    customer_name : String,
-    title : String,
-    content : String,
+type listQuestionData {
+    entity_id : Int
+    customer_name : String
+    title : String
+    content : String
     created_at : String
     updated_at : String
 }
 
+#Create Question
 type Mutation {
-    questionFormSubmit(input: questionInput!): questionOutput @resolver(class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CreateQuestion") @doc(description:"Question form")
+    createQuestion(input: createQuestionInput!): createQuestionOutput @resolver(class: "Tigren\\CustomerQuestion\\Model\\Resolver\\CreateQuestion")
 }
 
-input questionInput {
+input createQuestionInput {
     name: String
     title: String
     content: String
 }
 
-type questionOutput {
+type createQuestionOutput {
     success_message: String
+}
+
+#Update Question
+type Mutation {
+    updateQuestion(input: updateQuestionInput!): updateQuestionOutput @resolver(class: "Tigren\\CustomerQuestion\\Model\\Resolver\\UpdateQuestion")
+}
+
+input updateQuestionInput {
+    entity_id: Int
+    name: String
+    title: String
+    content: String
+}
+
+type updateQuestionOutput {
+    success_message: String
+}
+
+#Get Data with ID Edit
+type Mutation {
+    getDataIDEdit(input: idEdit!): [dataEdit] @resolver(class: "Tigren\\CustomerQuestion\\Model\\Resolver\\EditQuestion")
+}
+
+input idEdit {
+    entity_id: Int!
+}
+
+type dataEdit {
+    entity_id : Int
+    customer_name : String
+    title : String
+    content : String
+    created_at : String
+    updated_at : String
 }

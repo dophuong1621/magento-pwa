@@ -16,6 +16,11 @@ module.exports = (targets) => {
             pattern: '/tigren_question/create',
             path: require.resolve('../components/CustomerQuestion/create/createQuestion.js')
         });
+        routes.push({
+            name: 'CustomerQuestionUpdate',
+            pattern: '/tigren_question/edit/:id',
+            path: require.resolve('../components/CustomerQuestion/update/updateQuestion.js')
+        });
         return routes;
     });
 };

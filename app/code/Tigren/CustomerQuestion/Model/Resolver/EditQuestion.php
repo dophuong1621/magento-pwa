@@ -10,28 +10,27 @@ namespace Tigren\CustomerQuestion\Model\Resolver;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
-use Magento\Framework\GraphQl\Query\Resolver\Value;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 
 /**
- * Class CreateQuestion
+ * Class EditQuestion
  * @package Tigren\CustomerQuestion\Model\Resolver
  */
-class CreateQuestion implements ResolverInterface
+class EditQuestion implements ResolverInterface
 {
     /**
-     * @var DataProvider\CreateQuestion
+     * @var DataProvider\EditQuestion
      */
-    private $createQuestion;
+    private $editQuestion;
 
     /**
-     * @param
+     * @param DataProvider\EditQuestion $editQuestion
      */
     public function __construct(
-        DataProvider\CreateQuestion $createQuestion
+        DataProvider\EditQuestion $editQuestion
     ) {
-        $this->createQuestion = $createQuestion;
+        $this->editQuestion = $editQuestion;
     }
 
     /**
@@ -54,14 +53,10 @@ class CreateQuestion implements ResolverInterface
         if (empty($args['input']) || !is_array($args['input'])) {
             throw new GraphQlInputException(__('"input" value should be specified'));
         }
-        $customer_name = $args['input']['name'];
-        $title = $args['input']['title'];
-        $content = $args['input']['content'];
+        $entity_id = $args['input']['entity_id'];
 
-        return $this->createQuestion->createQuestion(
-            $customer_name,
-            $title,
-            $content
+        return $this->editQuestion->editQuestion(
+            $entity_id
         );
     }
 }

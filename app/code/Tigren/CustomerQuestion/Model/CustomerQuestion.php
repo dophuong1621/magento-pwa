@@ -15,7 +15,7 @@ use Magento\Framework\Model\AbstractModel;
  */
 class CustomerQuestion extends AbstractModel
 {
-    const CustomerQuestion_ID = 'customer_id';
+    const CustomerQuestion_ID = 'entity_id';
 
     /**
      * @var string

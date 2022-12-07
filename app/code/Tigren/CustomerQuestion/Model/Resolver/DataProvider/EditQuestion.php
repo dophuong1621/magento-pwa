@@ -9,40 +9,45 @@ namespace Tigren\CustomerQuestion\Model\Resolver\DataProvider;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
-use Tigren\CustomerQuestion\Model\ResourceModel\CustomerQuestion\CollectionFactory;
+use Tigren\CustomerQuestion\Model\CustomerQuestionFactory;
 
 /**
- * Class CustomerQuestionData
+ * Class EditQuestion
  * @package Tigren\CustomerQuestion\Model\Resolver\DataProvider
  */
-class CustomerQuestionData
+class EditQuestion
 {
     /**
-     * @var CollectionFactory
+     * @var CustomerQuestionFactory
      */
-    protected $collection;
+    private $editQuestion;
 
     /**
-     * @param CollectionFactory $collection
+     * @param CustomerQuestionFactory $editQuestion
      */
     public function __construct(
-        CollectionFactory $collection
+        CustomerQuestionFactory $editQuestion,
     ) {
-        $this->collection = $collection;
+        $this->editQuestion = $editQuestion;
     }
 
     /**
-     * @return array|null
+     * @param $entity_id
+     * @return array
      * @throws GraphQlNoSuchEntityException
      */
-    public function getCustomerQuestionData()
+    public function editQuestion($entity_id)
     {
         try {
-            $collection = $this->collection->create();
-            $customerQuestionData = $collection->getData();
+            $loadData = $this->editQuestion->create()->load($entity_id);
+            $editQuestion = $loadData->getData();
+            $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+            $logger = new \Zend_Log();
+            $logger->addWriter($writer);
+            $logger->info(print_r($editQuestion, true));
         } catch (NoSuchEntityException $e) {
             throw new GraphQlNoSuchEntityException(__($e->getMessage()), $e);
         }
-        return $customerQuestionData;
+        return $editQuestion;
     }
 }

@@ -6,9 +6,15 @@
 
 import { gql } from '@apollo/client';
 
-export const GET_LIST_QUESTION_QUERY = gql`
-    query CustomerQuestionData {
-        getCustomerQuestionData {
+export const EDIT_CUSTOMER_QUESTION = gql`
+    mutation getDataIDEdit(
+        $entity_id: Int!
+    ) {
+        getDataIDEdit (
+            input: {
+                entity_id: $entity,
+            }
+        ){
             entity_id
             customer_id
             customer_name
@@ -21,5 +27,5 @@ export const GET_LIST_QUESTION_QUERY = gql`
 `;
 
 export default {
-    listCustomerQuestion: GET_LIST_QUESTION_QUERY
+    editCustomerQuestion: EDIT_CUSTOMER_QUESTION
 };

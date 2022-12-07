@@ -13,15 +13,15 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
 use Tigren\CustomerQuestion\Model\CustomerQuestionFactory;
 
 /**
- * Class CreateQuestion
+ * Class UpdateQuestion
  * @package Tigren\CustomerQuestion\Model\Resolver\DataProvider
  */
-class CreateQuestion
+class UpdateQuestion
 {
     /**
      * @var CustomerQuestionFactory
      */
-    private $createQuestion;
+    private $updateQuestion;
 
     /**
      * @var DateTime
@@ -29,38 +29,39 @@ class CreateQuestion
     protected $date;
 
     /**
-     * @param CustomerQuestionFactory $createQuestion
+     * @param CustomerQuestionFactory $updateQuestion
      * @param DateTime $date
      */
     public function __construct(
-        CustomerQuestionFactory $createQuestion,
+        CustomerQuestionFactory $updateQuestion,
         DateTime $date,
     ) {
-        $this->createQuestion = $createQuestion;
+        $this->updateQuestion = $updateQuestion;
         $this->date = $date;
     }
 
     /**
+     * @param $entity_id
      * @param $customer_name
      * @param $title
      * @param $content
      * @return array
      * @throws GraphQlNoSuchEntityException
      */
-    public function createQuestion($customer_name, $title, $content)
+    public function updateQuestion($entity_id, $customer_name, $title, $content)
     {
         try {
+            $thanks_message['success_message'] = "Error !";
             $dateCurrent = $this->date->gmtDate();
-            $data = [
-                'customer_name' => $customer_name,
-                'title' => $title,
-                'content' => $content,
-                'created_at' => $dateCurrent
-            ];
-            $createQuestion = $this->createQuestion->create();
-            $createQuestion->addData($data);
-            $createQuestion->save();
-            $thanks_message['success_message'] = "Thanks For Question";
+            if (isset($entity_id)) {
+                $createQuestion = $this->updateQuestion->create()->load($entity_id);
+                $createQuestion->setData('customer_name', $customer_name);
+                $createQuestion->setData('title', $title);
+                $createQuestion->setData('content', $content);
+                $createQuestion->setData('updated_at', $dateCurrent);
+                $createQuestion->save();
+                $thanks_message['success_message'] = "Thanks For Update Question";
+            }
         } catch (NoSuchEntityException $e) {
             throw new GraphQlNoSuchEntityException(__($e->getMessage()), $e);
         }

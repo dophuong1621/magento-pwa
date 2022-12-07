@@ -6,14 +6,16 @@
 
 import { gql } from '@apollo/client';
 
-export const CREATE_CUSTOMER_QUESTION = gql`
-    mutation createQuestion(
+export const UPDATE_CUSTOMER_QUESTION = gql`
+    mutation updateQuestion(
+        $entity_id: Int!
         $customer_name: String!
         $title: String!
         $content: String!
     ) {
-        createQuestion (
+        updateQuestion (
             input: {
+                entity_id: $entity_id,
                 name: $customer_name,
                 title: $title,
                 content: $content
@@ -25,5 +27,5 @@ export const CREATE_CUSTOMER_QUESTION = gql`
 `;
 
 export default {
-    createCustomerQuestion: CREATE_CUSTOMER_QUESTION
+    updateCustomerQuestion: UPDATE_CUSTOMER_QUESTION
 };
